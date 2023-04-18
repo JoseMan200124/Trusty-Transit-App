@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trusty Transit</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <link rel="stylesheet" href="vistas/css/style.css">
+    <link rel="icon" type="image/x-icon" href="vistas/img/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.4/tailwind.min.css'>
+
+    <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+
+</head>
+<body>
+<header>
+
+<nav class="navbar">
+    <ul>
+        <li style="--i:1;"><a href="index.html">Inicio</a></li>
+        <li style="--i:2;"><a href="nosotros.html">¿Quienes somos?</a></li>
+        <li style="--i:3;"><a href="catalogo.html">Catalogo</a></li>
+        <li style="--i:4;"><a href="contactanos.html">Contactanos</a></li>
+
+    </ul>
+</nav>
+
+<div class="menu"><i class="fas fa-bars"></i></div>
+
+</header>
+
+<section id="catalogo" class="flexbox">
+    <h1>Contactanos</h1>
+</section>
+
+<section id="contenido">
+    <div class="flex items-center min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto">
+          <div class="max-w-md mx-auto my-10 bg-white p-5 rounded-md shadow-sm">
+            <div class="text-center">
+              <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
+                Hablemos!
+              </h1>
+              <p class="text-gray-400 dark:text-gray-400">
+                Por favor, llena el formulario y envianos un mensaje.
+              </p>
+            </div>
+            <div class="m-7">
+              <form method="POST" id="form">
+                <input type="hidden" name="access_key" value="#" />
+                <input type="hidden" name="subject" value="#" />
+                <input type="hidden" name="redirect" value="#" />
+                <input type="checkbox" name="botcheck" id="" style="display: none;" />
+                <div class="mb-6">
+                  <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Nombre completo</label>
+                  <input type="text" name="name" id="name" placeholder="Lucila Chang" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                </div>
+                <div class="mb-6">
+                  <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Correo electrónico</label>
+                  <input type="email" name="email" id="email" placeholder="tu@correo.com" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                </div>
+                <div class="mb-6">
+                  <label for="phone" class="text-sm text-gray-600 dark:text-gray-400">Número de teléfono</label>
+                  <input type="text" name="phone" id="phone" placeholder="+502 1234 5678" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                </div>
+                <div class="mb-6">
+                  <label for="message" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Mensaje</label>
+      
+                  <textarea rows="5" name="message" id="message" placeholder="Tu mensaje" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" required></textarea>
+                </div>
+                <div class="mb-6">
+                  <button type="submit" class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none">
+                    Enviar mensaje
+                  </button>
+                </div>
+                <p class="text-base text-center text-gray-400" id="result"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<script src='https://js.hcaptcha.com/1/api.js'></script>
+
+</body>
+</html>
