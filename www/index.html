@@ -14,7 +14,9 @@
 
     <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+    <link rel="stylesheet" href="vistas/css/sweetalert.css">
 
+    <script src="vistas/js/sweetalert.min.js"></script>
 </head>
 <body>
 <header>
@@ -39,33 +41,31 @@
     <video src="vistas/img/landing.mp4" muted loop autoplay></video>
 </div>
 
-<div class="content">
+ <div class="content">
 
-    <h1>Trusty Transit</h1>
-    <h3>Descubre Guatemala con nosotros</h3>
+        <h1>Trusty Transit</h1>
+        <h3>Descubre Guatemala con nosotros</h3>
+        <div id="profile-icon" style="display: none;">
+            <img src="/www/img/icon.png" alt="Perfil" style="width: 75px;">
+            <p id="user-info" style="color:#fff; font-size: 30px!important; font-weight: 700;"></p>
+            <p id="user-email" style="color:#fff; font-size: 30px!important; font-weight: 700;"></p>
+            <input style="font-size: 15px; text-align: center;" id="logout-button" onclick="handleLogout()" value="Cerrar sesión">
 
-    <div class="form-container">
-
-        <form action="">
-
-            <h3>Registrate</h3>
-
-            <span>Nombres</span>
-            <input type="text" placeholder="nombre">
-
-            <span>Apellidos</span>
-            <input type="text" placeholder="apellidos">
-
-            <span>Correo</span>
-            <input type="mail" placeholder="correo@dominio.com">
-
-            <input class="btn-registro" type="submit" value="Registrarme">
-
-        </form>
-
+        </div>
+        <div class="form-container" id="form-container">
+            <form id="register-form">
+                <h3>Registrate</h3>
+                <span>Nombres</span>
+                <input type="text" placeholder="nombre" id="nombre">
+                <span>Apellidos</span>
+                <input type="text" placeholder="apellidos" id="apellidos">
+                <span>Correo</span>
+                <input type="email" placeholder="correo@dominio.com" id="correo">
+                <input class="btn-registro" type="submit" value="Registrarme">
+            </form>
+        </div>
+      
     </div>
-
-</div>
 
 </section>
 
@@ -207,7 +207,7 @@
     <h1>Suscribete para más novedades</h1>
     <p>Te mantendremos al tanto de nuevos servicios</p>
 
-    <form action="">
+    <form method="POST" id="form" onsubmit="submitForm(event);">
         <input type="email" placeholder="Ingresa tu correo">
         <input type="submit" class="btn" value="Enviar">
     </form>
@@ -224,16 +224,16 @@
 <h1 class="heading">Contactanos</h1>
 <h3 class="title">Si tienes alguna duda, hablemos!</h3>
 
-<form action="">
+<form method="POST" id="form" onsubmit="submitForm(event);">
 
 <div class="inputBox">
-    <input type="text" placeholder="Primer nombre">
-    <input type="text" placeholder="Segundo nombre">
+    <input type="text" placeholder="Primer nombre" id="primer_nombre">
+    <input type="text" placeholder="Segundo nombre" id="segundo_nombre">
 </div>
 
 <div class="inputBox">
-    <input type="email" placeholder="correo">
-    <input type="number" placeholder="teléfono">
+    <input type="email" placeholder="correo" id="correo2">
+    <input type="number" placeholder="teléfono" id="numero">
 </div>
 
 
@@ -348,6 +348,123 @@ function myFunction() {
     }
   }
 }
+</script>
+<script>
+
+    function submitForm(event){
+      event.preventDefault(); // Evita el envío real del formulario
+      const emailInput = document.getElementById('');
+
+
+      if (emailInput.value === '') {
+      // Muestra un SweetAlert con un mensaje de advertencia
+      swal({
+        title: "¡Advertencia!",
+        text: "Debes llenar todos los campos.",
+        type: "warning",
+        confirmButtonText: "Cerrar",
+        closeOnConfirm: true
+      });
+      return;
+    }else{
+        swal({
+                                    title: "¡Enviado!",
+                                    text: "Tu correo fue enviado.",
+                                    type:"success",
+                                    confirmButtonText: "Cerrar",
+                                    closeOnConfirm: false
+                                  },
+              
+                                  function(isConfirm){
+              
+                                      if(isConfirm){
+                      window.location.reload();
+  
+                                      }
+                              }
+            
+      );
+    }
+
+ 
+                
+      
+  
+    }
+  </script>
+
+<script>
+    const registerForm = document.getElementById('register-form');
+    registerForm.addEventListener('submit', handleRegister);
+
+    // Verifica si hay información de usuario en localStorage al cargar la página
+    window.onload = function() {
+        const userInfo = localStorage.getItem('user_info');
+        if (userInfo) {
+            showProfileIcon(JSON.parse(userInfo));
+        }
+    };
+
+    function handleRegister(e) {
+        e.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const apellidos = document.getElementById('apellidos').value;
+        const correo = document.getElementById('correo').value;
+
+        if (!nombre || !apellidos || !correo) {
+            swal({
+                title: "¡Advertencia!",
+                text: "Debes llenar todos los campos.",
+                type: "warning",
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: true
+            });
+            return;
+        }
+
+        // Simular el registro del usuario (aquí es donde implementarías el registro real)
+        // ...
+
+        // Muestra un SweetAlert con un ícono de perfil
+        swal({
+            title: "Registro exitoso",
+            text: "¡Te has registrado correctamente!",
+            type: "success",
+            confirmButtonText: "Aceptar",
+            closeOnConfirm: true
+        }, function() {
+            // Muestra el ícono del perfil en la página
+            const userInfo = { nombre, apellidos, correo };
+            showProfileIcon(userInfo);
+
+            // Guarda la información del usuario en localStorage
+            localStorage.setItem('user_info', JSON.stringify(userInfo));
+        });
+    }
+
+    function showProfileIcon(userInfo) {
+        const profileIcon = document.getElementById('profile-icon');
+            const userInfoElement = document.getElementById('user-info');
+            const userEmailElement = document.getElementById('user-email');
+            const formContainer = document.getElementById('form-container');
+
+            userInfoElement.textContent = `${userInfo.nombre} ${userInfo.apellidos}`;
+            userEmailElement.textContent = userInfo.correo;
+            profileIcon.style.display = 'block';
+            formContainer.style.display = 'none';
+    }
+    function handleLogout() {
+            // Elimina la información del usuario en localStorage
+            localStorage.removeItem('user_info');
+
+            // Oculta el ícono de perfil y muestra el formulario de registro
+            const profileIcon = document.getElementById('profile-icon');
+            const formContainer = document.getElementById('form-container');
+
+            profileIcon.style.display = 'none';
+            formContainer.style.display = 'block';
+        }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
